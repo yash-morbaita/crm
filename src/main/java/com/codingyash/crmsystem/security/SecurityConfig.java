@@ -21,8 +21,8 @@ public class SecurityConfig {
 
         http.authorizeHttpRequests(configurer ->
                         configurer
-//                                .requestMatchers("/").hasRole("EMPLOYEE")
-//                                .requestMatchers("/leaders/**").hasRole("MANAGER")
+                                .requestMatchers("/").hasRole("EMPLOYEE")
+//                                .requestMatchers("/").hasRole("MANAGER")
 //                                .requestMatchers("/systems").hasRole("ADMIN")
                                 .anyRequest().authenticated()
                 )
@@ -33,11 +33,10 @@ public class SecurityConfig {
                                 .loginProcessingUrl("/authenticateTheUser")
                                 .permitAll()
                 )
-                .logout(logout -> logout.permitAll()
+                .logout(logout -> logout.permitAll())
+                .exceptionHandling(configurer ->
+                        configurer.accessDeniedPage("/access-denied")
                 );
-//                .exceptionHandling(configurer ->
-//                        configurer.accessDeniedPage("/access-denied")
-//                );
 
 
 

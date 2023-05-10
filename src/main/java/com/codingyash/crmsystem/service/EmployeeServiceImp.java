@@ -18,33 +18,33 @@ public class EmployeeServiceImp implements EmployeeService{
 
     @Override
     public List<Employee> findAll() {
-        List<Employee> theEmployee = daoConfig.findAll();
-        return theEmployee;
+        return daoConfig.findAll();
     }
 
     @Override
     public Employee findById(int theId) {
         Optional<Employee> result = daoConfig.findById(theId);
+
         Employee theEmployee = null;
-        if(result.isPresent())
-        {
-           theEmployee = result.get();
-           return theEmployee;
+
+        if (result.isPresent()) {
+            theEmployee = result.get();
         }
         else {
-            throw new RuntimeException("We could find the Student" + theId);
+            // we didn't find the employee
+            throw new RuntimeException("Did not find employee id - " + theId);
         }
+
+        return theEmployee;
     }
 
     @Override
-    public void saveEmployee(Employee theEmployee) {
+    public void save(Employee theEmployee) {
         daoConfig.save(theEmployee);
-
     }
 
     @Override
     public void deleteById(int theId) {
-        Employee theEmployee = findById(theId);
         daoConfig.deleteById(theId);
     }
 }
